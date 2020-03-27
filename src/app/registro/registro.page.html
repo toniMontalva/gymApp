@@ -58,6 +58,35 @@
       <ion-input type="text" [(ngModel)]="localidad" [ngModelOptions]="{standalone: true}" required></ion-input>
     </ion-item>
 
+
+    <ion-list>
+      <ion-radio-group value="no">
+        <ion-list-header>
+          <ion-label>Lesiones anteriormente</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Si</ion-label>
+          <ion-radio slot="start" value="si"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>No</ion-label>
+          <ion-radio slot="start" value="no"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Objetivo</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let entry of form" >
+        <ion-label>{{entry.val}}</ion-label>
+        <ion-checkbox slot="end" [ngModelOptions]="{standalone: true}" [(ngModel)]="entry.isChecked"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+
+
     <ion-item lines="full">
       <ion-label position="floating">¿Cómo nos conociste?</ion-label>
       <ion-select [(ngModel)]="comoNosConociste" [ngModelOptions]="{standalone: true}" como ok-text="Confirmar" cancel-text="Cancelar" required>

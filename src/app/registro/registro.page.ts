@@ -15,11 +15,20 @@ export class RegistroPage implements OnInit {
   localidad: string = "";
   numTelf: number;
   objetivo: string = "";
-  lesion: boolean;
+  lesion: string = "";
   queLesion: string = "";
   comoNosConociste: string = "";
   password: string = "";
   confPassword: string = "";
+
+  public form = [
+    { val: 'Aumentar Volumen', isChecked: false },
+    { val: 'Perder Grasa', isChecked: false },
+    { val: 'Rehabilitación', isChecked: false },
+    { val: 'Solo practicar deporte', isChecked: false },
+    { val: 'Tonificar', isChecked: false },
+    { val: 'Otro', isChecked: false },
+  ]
 
   constructor() { }
 
