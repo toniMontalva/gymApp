@@ -20,6 +20,15 @@
     </ion-item>
 
     <ion-item lines="full">
+      <ion-label position="floating">Fecha Nacimiento</ion-label>
+      <ion-datetime
+        [(ngModel)]="fechaNacimiento" [ngModelOptions]="{standalone:true}"
+        displayFormat="DD/MMMM/YYYY"
+        monthNames="Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre"
+        ></ion-datetime>
+    </ion-item>
+
+    <ion-item lines="full">
       <ion-label position="floating">Email</ion-label>
       <ion-input type="text" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required></ion-input>
     </ion-item>
@@ -44,8 +53,13 @@
       <ion-input type="text" minlength=9 maxlength=12 required [(ngModel)]="numTelf" [ngModelOptions]="{standalone: true}"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label>¿Cómo nos conociste?</ion-label>
+    <ion-item lines="full">
+      <ion-label position="floating">Localidad</ion-label>
+      <ion-input type="text" [(ngModel)]="localidad" [ngModelOptions]="{standalone: true}" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">¿Cómo nos conociste?</ion-label>
       <ion-select [(ngModel)]="comoNosConociste" [ngModelOptions]="{standalone: true}" como ok-text="Confirmar" cancel-text="Cancelar" required>
         <ion-select-option value="pagWeb">Página Web</ion-select-option>
         <ion-select-option value="facebook">Facebook</ion-select-option>
