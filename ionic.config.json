@@ -1,7 +1,8 @@
 {
   "name": "gymApp",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

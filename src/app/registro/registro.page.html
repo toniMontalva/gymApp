@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="nombre" [ngModelOptions]="{standalone: true}" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Apellidos</ion-label>
+      <ion-input type="text" [(ngModel)]="apellidos" [ngModelOptions]="{standalone: true}" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="text" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Confirmar Contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="confPassword" [ngModelOptions]="{standalone: true}" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">DNI</ion-label>
+      <ion-input type="text" pattern="[0-9]{8}[A-Z]{1}" [(ngModel)]="DNI" [ngModelOptions]="{standalone: true}" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Teléfono</ion-label>
+      <ion-input type="text" minlength=9 maxlength=12 required [(ngModel)]="numTelf" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>¿Cómo nos conociste?</ion-label>
+      <ion-select [(ngModel)]="comoNosConociste" [ngModelOptions]="{standalone: true}" como ok-text="Confirmar" cancel-text="Cancelar" required>
+        <ion-select-option value="pagWeb">Página Web</ion-select-option>
+        <ion-select-option value="facebook">Facebook</ion-select-option>
+        <ion-select-option value="twitter">Twitter</ion-select-option>
+        <ion-select-option value="tripAdvisor">TripAdvisor</ion-select-option>
+        <ion-select-option value="youTube">YouTube</ion-select-option>
+        <ion-select-option value="periodoDigital">Periódico Digital</ion-select-option>
+        <ion-select-option value="amigos">Amigos</ion-select-option>
+        <ion-select-option value="familiares">Familiares</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-row>
+      <ion-col style="text-align: center;">
+        <ion-button [routerLink]="['/registro']" expand="block" color="primary">Registrarse</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
