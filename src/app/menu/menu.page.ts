@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.page.scss'],
 })
 export class MenuPage implements OnInit {
+  public folder: string;
 
-  constructor() { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit() {
+    this.folder = this.activatedRoute.snapshot.paramMap.get('id');
   }
 
 }
