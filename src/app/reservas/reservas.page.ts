@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Calendar } from '@ionic-native/calendar/ngx';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-reservas',
@@ -9,13 +9,13 @@ import { Calendar } from '@ionic-native/calendar/ngx';
 })
 export class ReservasPage implements OnInit {
 
-  constructor(private calendar: Calendar) { }
+  public folder: string;
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.calendar.createCalendar('MyCalendar').then(
-      (msg) => { console.log(msg); },
-      (err) => { console.log(err); }
-    );
+    this.folder = this.activatedRoute.snapshot.paramMap.get('id');    
   }
+
 
 }
