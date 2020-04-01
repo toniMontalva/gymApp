@@ -19,6 +19,8 @@ import { environment } from '../environments/environment';
 
 import { CalendarModule } from 'ion2-calendar';
 
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -35,6 +37,7 @@ import { CalendarModule } from 'ion2-calendar';
     StatusBar,
     SplashScreen,
     AuthService,
+    InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

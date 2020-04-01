@@ -8,6 +8,8 @@ import { AuthService } from '../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
@@ -39,9 +41,33 @@ export class RegistroPage implements OnInit {
       { val: 'Otro', isChecked: false },
     ]
 
-    constructor(private router: Router, private activatedRoute: ActivatedRoute, public toastController: ToastController, private _authService: AuthService, public afAuth: AngularFireAuth) { }
+    constructor(private iab: InAppBrowser, private router: Router, private activatedRoute: ActivatedRoute, public toastController: ToastController, private _authService: AuthService, public afAuth: AngularFireAuth) { }
 
     ngOnInit() {
+    }
+
+    abrirPoliticaPrivacidadSystem() {
+      this.iab.create('https://www.femesport.es/politica-de-privacidad/', '_system');
+    }
+
+    abrirPoliticaPrivacidadBlank() {
+      this.iab.create('https://www.femesport.es/politica-de-privacidad/', '_blank');
+    }
+
+    abrirNormasCentroSystem(){
+      this.iab.create('https://femesport.es/wp-content/uploads/2018/10/NORMAS-DE-USO-DEL-CENTRO-FEM-ESPORT-ALZIRA.pdf', '_system');
+    }
+
+    abrirNormasCentroBlank() {
+      this.iab.create('https://femesport.es/wp-content/uploads/2018/10/NORMAS-DE-USO-DEL-CENTRO-FEM-ESPORT-ALZIRA.pdf', '_blank');
+    }
+
+    abrirAvisoLegalSystem() {
+      this.iab.create('https://www.femesport.es/aviso-legal/', '_system');
+    }
+
+    abrirAvisoLegalBlank() {
+      this.iab.create('https://www.femesport.es/aviso-legal/', '_blank');
     }
 
 }
