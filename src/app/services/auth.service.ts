@@ -3,6 +3,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { ICliente, IEmpresa } from '../interfaces/interfaces';
+import { Router } from '@angular/router';
 
 @Injectable()
 
@@ -18,7 +19,7 @@ export class AuthService {
     // variable para guardar las reservas de un usuario logueado
     reservasRestantesUsuario: number = 0;
 
-    constructor(private _db: AngularFireDatabase, public afAuth: AngularFireAuth){
+    constructor(private _db: AngularFireDatabase, public afAuth: AngularFireAuth, private router: Router){
 
     }
 
@@ -83,6 +84,15 @@ export class AuthService {
             .catch((error: any) => 
                 console.error(error)
             );
+    }
+
+    signOut() {
+        return this.afAuth
+            .auth
+            .signOut()
+            .then(() => {
+                this.router.navigate(['auth']);
+            })
     }
 
     forgotPass(email: string) {
