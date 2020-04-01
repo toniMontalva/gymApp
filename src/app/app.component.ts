@@ -38,9 +38,9 @@ export class AppComponent implements OnInit {
       icon: 'chatbubbles'
     },
     {
-      title: 'Spam',
-      url: '/folder/Spam',
-      icon: 'warning'
+      title: 'Salir',
+      url: '/auth',
+      icon: 'exit'
     }
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];

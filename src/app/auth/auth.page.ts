@@ -27,6 +27,8 @@ export class AuthPage implements OnInit {
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+    this._authService.signOut();
+    console.log("Al abrir pestaña tengo" + this._authService.clienteKey);
   }
 
   async presentToastUserNotFound() {
@@ -85,6 +87,7 @@ export class AuthPage implements OnInit {
   goToHomePage() {
     this.saveLoggedUser();
     this.presentToastWelcomeUser();
+    console.log("Al iniciar sesion tengo " + this._authService.clienteKey);
     this.router.navigateByUrl('/menu');
   }
 
@@ -102,10 +105,10 @@ export class AuthPage implements OnInit {
       this.goToHomePage();
     } catch(err) {
         console.dir(err)
-        if(password == '') {
-          this.presentToastPasswordEmpty();
-        } else if(email == '') {
+        if(email == '') {
           this.presentToastEmailEmpty();
+        } else if(password == '') {
+          this.presentToastPasswordEmpty();
         }
         else {
           if(err.code === "auth/user-not-found") {

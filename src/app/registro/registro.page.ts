@@ -47,6 +47,42 @@ export class RegistroPage implements OnInit {
     ngOnInit() {
     }
 
+    async presentToast() {
+      const toast = await this.toastController.create({
+        message: 'Hola!',
+        duration: 2000,
+      });
+      toast.present()
+    }
+
+    async presentToastWithOptions() {
+      const toast = await this.toastController.create({
+        header: 'Usuario registrado correctamente',
+        message: 'Espere a que activen sus credenciales',
+        buttons: [
+          {
+            text: 'Contacto',
+            side: 'start',
+            handler: () => {
+              this.router.navigate(['contacto']);
+              console.log('Favorite clicked');
+            }
+          }, {
+            text: 'Cerrar',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
+      });
+      toast.present();
+    }
+
+    register() {
+      this.presentToastWithOptions();
+    }
+
     abrirPoliticaPrivacidadSystem() {
       this.iab.create('https://www.femesport.es/politica-de-privacidad/', '_system');
     }

@@ -24,13 +24,15 @@ export class AuthService {
     }
 
     getClientesRefencia() : firebase.database.Reference {
-        let ref = this._db.database.ref("clientes");
-        return ref;
+        return this._db.database.ref("clientes");
     }
 
     getReservasReferencia() : firebase.database.Reference {
-        let ref = this._db.database.ref("reservas");
-        return ref;
+        return this._db.database.ref("reservas");
+    }
+
+    getEmpresaReferencia() : firebase.database.Reference {
+        return this._db.database.ref("empresas");
     }
 
     insertarReserva(year: string, month: string, day: string, hour: string, minutes: string) {
@@ -72,27 +74,35 @@ export class AuthService {
             .then(data => {
                 
             });
+        this.getLoggedUserFirebase();
     }
 
-    register(email: string, password: string) {
-        this.afAuth
-            .auth
-            .createUserWithEmailAndPassword(email, password)
-            .then(data => {
-                console.log(data);
-            })
-            .catch((error: any) => 
-                console.error(error)
-            );
+    async register(email: string, password: string) {
+        await this.afAuth
+                .auth
+                .createUserWithEmailAndPassword(email, password)
+                .then(data => {
+                    console.log(data);
+                })
+                .catch((error: any) => 
+                    console.error(error)
+                );
+    }
+
+    registrarInfoUsuario(user: ICliente) {
+
+        let ref = this.getClientesRefencia();
+        ref.push(user);
     }
 
     signOut() {
+        this.clienteKey = "";
         return this.afAuth
             .auth
             .signOut()
             .then(() => {
                 this.router.navigate(['auth']);
-            })
+            })            
     }
 
     forgotPass(email: string) {
@@ -108,12 +118,14 @@ export class AuthService {
     }
 
     getLoggedUserFirebase() {
-        this.afAuth.auth.onAuthStateChanged((user) => {
+        this.clienteKey = "";
+        this.clienteKey = this.afAuth.auth.currentUser.uid;
+        /*this.afAuth.auth.onAuthStateChanged((user) => {
             if(user) {
                 this.clienteKey = user.uid;
             } else {
                 // nada
             }
-        })
+        })*/
     }
 }

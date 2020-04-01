@@ -111,13 +111,13 @@
     
     <ion-row>
       <ion-col style="text-align: center;">
-        <ion-button [routerLink]="['/registro']" expand="block" color="primary">Registrarse</ion-button>
+        <ion-button type="submit" expand="block" color="primary" (click)="register()">Registrarse</ion-button>
       </ion-col>
     </ion-row>
   </form>
 </ion-content>
 
-<ion-footer style="background-color: cornsilk; color: crimson;">
+<ion-footer style="background-color: cornsilk; color: crimson; padding: 3%; ">
   <span>Al registrarte, aceptas nuestra 
     <a (click)="abrirPoliticaPrivacidadBlank()" style="color: crimson; font-weight: bold;">Política de Privacidad</a>, 
     <a (click)="abrirNormasCentroBlank()" style="color: crimson; font-weight: bold;">Normas del Centro</a> y 
