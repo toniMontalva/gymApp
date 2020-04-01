@@ -4,6 +4,7 @@ import * as moment from 'moment';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-reservas',
@@ -27,12 +28,11 @@ export class ReservasPage implements OnInit {
   // TODO
   // reservasRestantes: Number = llamar a BBDD para comprobar
 
-  reservasRestantes: any = 3;
+  reservasRestantes: number = 0;
 
-  constructor(public toastController: ToastController) { }
+  constructor(public toastController: ToastController, private authService: AuthService) { }
 
-  ngOnInit() {
-    this.reservasRestantes = 3;
+  ngOnInit() {    
   }
 
   async presentToastReservaError() {
@@ -43,25 +43,20 @@ export class ReservasPage implements OnInit {
     toast.present();
   }
 
-  mostrarFecha() {
-    console.log(this.hoursReserva);
+  reservar() {
+    // TODO 
     let year = this.date.substr(0,4);
     let month = this.date.substr(5,2);
     let day = this.date.substr(8,2);
     let hour = this.hoursReserva.substr(0,2);
     let minutes = this.hoursReserva.substr(3,2);
-    console.log("Year " + year);
-    console.log("Month " + month);
-    console.log("Day " + day);
-    console.log("Hour " + hour);
-    console.log("minutes " + minutes);
-  }
 
-  reservar() {
-    // TODO 
+    this.reservasRestantes = this.authService.reservasRestantesUsuario;
+
     if(this.reservasRestantes == 0){
       this.presentToastReservaError();
     } else {
+      this.authService.insertarReserva(year, month, day, hour, minutes);
       this.reservasRestantes--;
     }  
   }

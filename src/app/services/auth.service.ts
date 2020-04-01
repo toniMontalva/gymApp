@@ -12,9 +12,11 @@ export class AuthService {
     cliente: ICliente;
     email: string;
 
-
+    // variable para guardar el id de las reservas(fecha)
     idReserva: string = "";
 
+    // variable para guardar las reservas de un usuario logueado
+    reservasRestantesUsuario: number = 0;
 
     constructor(private _db: AngularFireDatabase, public afAuth: AngularFireAuth){
 
@@ -36,6 +38,9 @@ export class AuthService {
 
         this.idReserva = "";
         this.idReserva.concat(day).concat("-").concat(month).concat("-").concat(year);
+
+        ref.push(this.idReserva);
+        this.reservasRestantesUsuario--;
     }
 
     saveClientes() {

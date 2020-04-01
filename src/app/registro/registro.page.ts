@@ -37,7 +37,8 @@ export class RegistroPage implements OnInit {
       { val: 'Perder Grasa', isChecked: false },
       { val: 'Rehabilitación', isChecked: false },
       { val: 'Solo practicar deporte', isChecked: false },
-      { val: 'Tonificar', isChecked: false },
+      // Dedundante
+      // { val: 'Tonificar', isChecked: false },
       { val: 'Otro', isChecked: false },
     ]
 
