@@ -46,19 +46,27 @@ export class AuthService {
         this.idReserva = "";
         this.idReserva.concat(day).concat("-").concat(month).concat("-").concat(year);
 
-        let id = this.idReserva;
+        let id = "";
+        id += day;
+        id += "-";
+        id += month;
+        id += "-";
+        id += year;
+
+        console.log("El id es " + id + "me llegan parametros "+year+month+day);
 
         let horaPush = hour.concat(":").concat(minutes);
 
-        let ref = this._db.database.ref("Reservas/"+id);
+        let ref = this._db.database.ref("/Reservas/"+id);
 
-        let data = {  
+        let data = { 
             //"Cliente": this.clienteKey,
             "Cliente": "yo",
             "Hora": horaPush
         }
 
         ref.push(data);
+        
         this.reservasRestantesUsuario--;
     }
 

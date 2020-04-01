@@ -81,6 +81,7 @@ export class RegistroPage implements OnInit {
 
     register() {
       this.presentToastWithOptions();
+      this._authService.register(this.email, this.password);
     }
 
     abrirPoliticaPrivacidadSystem() {
