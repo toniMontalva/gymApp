@@ -28,7 +28,7 @@ export class ReservasPage implements OnInit {
   // TODO
   // reservasRestantes: Number = llamar a BBDD para comprobar
 
-  reservasRestantes: number = 0;
+  reservasRestantes: number = 2;
 
   constructor(public toastController: ToastController, private authService: AuthService) { }
 

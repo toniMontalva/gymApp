@@ -17,41 +17,55 @@ export class AuthService {
     idReserva: string = "";
 
     // variable para guardar las reservas de un usuario logueado
-    reservasRestantesUsuario: number = 0;
+    reservasRestantesUsuario: number = 2;
 
     constructor(private _db: AngularFireDatabase, public afAuth: AngularFireAuth, private router: Router){
 
     }
 
     getClientesRefencia() : firebase.database.Reference {
-        return this._db.database.ref("clientes");
+        return this._db.database.ref("Clientes");
     }
 
     getReservasReferencia() : firebase.database.Reference {
-        return this._db.database.ref("reservas");
+        return this._db.database.ref("Reservas");
     }
 
     getEmpresaReferencia() : firebase.database.Reference {
-        return this._db.database.ref("empresas");
+        return this._db.database.ref("Empresas");
     }
 
     insertarReserva(year: string, month: string, day: string, hour: string, minutes: string) {
-        let ref = this.getReservasReferencia();        
+        //let ref = this.getReservasReferencia();
         let time = new Date(parseInt(year), parseInt(month), parseInt(day), parseInt(hour), parseInt(minutes));
 
         this.getReservasRestantes();
 
+        this.reservasRestantesUsuario = 2;
+
         this.idReserva = "";
         this.idReserva.concat(day).concat("-").concat(month).concat("-").concat(year);
 
-        ref.push(this.idReserva);
+        let id = this.idReserva;
+
+        let horaPush = hour.concat(":").concat(minutes);
+
+        let ref = this._db.database.ref("Reservas/"+id);
+
+        let data = {  
+            //"Cliente": this.clienteKey,
+            "Cliente": "yo",
+            "Hora": horaPush
+        }
+
+        ref.push(data);
         this.reservasRestantesUsuario--;
     }
 
     getReservasRestantes() : number {
         // TODO
         let ref = this.getClientesRefencia();
-        
+
         return 1;
     }
 
