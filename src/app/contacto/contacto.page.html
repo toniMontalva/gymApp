@@ -8,5 +8,49 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div>
+          <ion-text color="secondary">
+            <h1>¿Quieres contactar con nosotros?</h1>
+          </ion-text>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div>
+          <ion-button expand="block" (click)="llamarEmpresa()">
+            <ion-icon slot="start" name="call"></ion-icon>
+            Llámanos
+          </ion-button>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <!-- Cambiar por email de empresa -->
+          <ion-button expand="block" href="mailto:test@test.com">
+            <ion-icon slot="start" name="mail"></ion-icon>
+            Email
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div>
+          <ion-text>
+            <h3>Nuestro horario:</h3>
+            <ul>
+              <h4>Lunes - Viernes | 9h a 21h</h4>
+              <h4>Sábado | 10h a 13h</h4>
+            </ul>            
+          </ion-text>
+        </div>
+      </ion-col>
+    </ion-row>    
+  </ion-grid>
+  
+  
 </ion-content>
