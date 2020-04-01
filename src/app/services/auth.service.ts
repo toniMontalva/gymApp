@@ -13,6 +13,9 @@ export class AuthService {
     email: string;
 
 
+    idReserva: string = "";
+
+
     constructor(private _db: AngularFireDatabase, public afAuth: AngularFireAuth){
 
     }
@@ -20,6 +23,19 @@ export class AuthService {
     getClientesRefencia() : firebase.database.Reference {
         let ref = this._db.database.ref("clientes");
         return ref;
+    }
+
+    getReservasReferencia() : firebase.database.Reference {
+        let ref = this._db.database.ref("reservas");
+        return ref;
+    }
+
+    insertarReserva(year: string, month: string, day: string, hour: string, minutes: string) {
+        let ref = this.getReservasReferencia();        
+        let time = new Date(parseInt(year), parseInt(month), parseInt(day), parseInt(hour), parseInt(minutes));
+
+        this.idReserva = "";
+        this.idReserva.concat(day).concat("-").concat(month).concat("-").concat(year);
     }
 
     saveClientes() {
