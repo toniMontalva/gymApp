@@ -36,11 +36,20 @@ export class AuthService {
         let ref = this.getReservasReferencia();        
         let time = new Date(parseInt(year), parseInt(month), parseInt(day), parseInt(hour), parseInt(minutes));
 
+        this.getReservasRestantes();
+
         this.idReserva = "";
         this.idReserva.concat(day).concat("-").concat(month).concat("-").concat(year);
 
         ref.push(this.idReserva);
         this.reservasRestantesUsuario--;
+    }
+
+    getReservasRestantes() : number {
+        // TODO
+        let ref = this.getClientesRefencia();
+        
+        return 1;
     }
 
     saveClientes() {
@@ -64,12 +73,24 @@ export class AuthService {
             });
     }
 
+    register(email: string, password: string) {
+        this.afAuth
+            .auth
+            .createUserWithEmailAndPassword(email, password)
+            .then(data => {
+                console.log(data);
+            })
+            .catch((error: any) => 
+                console.error(error)
+            );
+    }
+
     forgotPass(email: string) {
         this.afAuth
             .auth
             .sendPasswordResetEmail(email)
             .then(function() {
-
+                window.alert('El email de recuperación de contraseña ha sido enviado, revise su inbox.');
             })
             .catch(function(error){
                 // error
