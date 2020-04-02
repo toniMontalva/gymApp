@@ -34,16 +34,16 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Contacto',
-      url: '/contacto',
+      url: '/contact',
       icon: 'chatbubbles'
     },
-    {
+    /*{
       title: 'Salir',
       url: '/auth',
       icon: 'exit'
-    }
+    }*/
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  //public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     private platform: Platform,

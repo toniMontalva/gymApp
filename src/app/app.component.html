@@ -22,8 +22,21 @@
             <ion-label>{{ label }}</ion-label>
           </ion-item>
         </ion-list>
-        
+            
       </ion-content>
+
+      <ion-footer>
+        <ion-toolbar>
+          <ion-row align-items-center>
+            <ion-col>
+              <ion-button icon-only clear color="light">
+                <ion-icon ios="log-out-outline" md="log-out-sharp" size="large"></ion-icon>
+              </ion-button>          
+            </ion-col>                  
+          </ion-row>
+        </ion-toolbar>
+      </ion-footer>
+
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>

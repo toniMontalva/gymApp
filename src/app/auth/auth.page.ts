@@ -23,6 +23,8 @@ export class AuthPage implements OnInit {
   email: string = "";
   password: string = "";
 
+  username: string = "";
+
   constructor(private router: Router, private activatedRoute: ActivatedRoute, public toastController: ToastController, private _authService: AuthService, public afAuth: AngularFireAuth ) { }
 
   ngOnInit() {
@@ -79,6 +81,30 @@ export class AuthPage implements OnInit {
     toast.present()
   }
 
+  async presentToastCredentialsNotAllowedYet() {
+    const toast = await this.toastController.create({
+      header: 'Hola ' + this.username,
+      message: 'Espere a que un administrador active sus credenciales',
+      buttons: [
+        {
+          text: 'Contacto',
+          side: 'start',
+          handler: () => {
+            this.router.navigate(['contacto']);
+            console.log('Favorite clicked');
+          }
+        }, {
+          text: 'Cerrar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    toast.present();
+  }
+
   saveLoggedUser() {
     //let res = this._productoService.getLoggedUser(this.username);    
     this._authService.getLoggedUserFirebase();
@@ -103,15 +129,15 @@ export class AuthPage implements OnInit {
       const res = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
       this._authService.getLoggedUserFirebase();
 
-      let allowed = await this._authService.userIsAllowedToLogin(this._authService.clienteKey);
+      await this._authService.getUserNameOfLoggedUser();
+      this.username = this._authService.username;
 
-      console.log("me ha llegado un " + allowed);
+      let allowed = await this._authService.userIsAllowedToLogin(this._authService.clienteKey);
 
       if(!allowed) {
           this._authService.signOutNew();
-          console.log("no estoy activado y me deslogueo");
+          this.presentToastCredentialsNotAllowedYet();
       } else {
-          console.log("estoy activado y sigo logueado");
           this.goToHomePage();
       }      
     } catch(err) {

@@ -11,6 +11,10 @@ export class AuthService {
     clienteKey: string;
     clientes: ICliente[] = [];
     cliente: ICliente;
+
+    // variable para almacenar el nombre del usuario logueado
+    username: string = "";
+
     email: string;
 
     // variable para guardar el id de las reservas(fecha)
@@ -33,6 +37,20 @@ export class AuthService {
 
     getEmpresaReferencia() : firebase.database.Reference {
         return this._db.database.ref("Empresas");
+    }
+
+    async getUserNameOfLoggedUser() {
+        let ref = this.getClientesRefencia();
+
+        await ref.once("value", snapshot => {
+            snapshot.forEach(child => {
+                let user = child.val();
+                if(user.id === this.clienteKey) {
+                    this.username = user.nombre;
+                    return true;
+                }
+            })
+        })
     }
 
     insertarReserva(year: string, month: string, day: string, hour: string, minutes: string) {
