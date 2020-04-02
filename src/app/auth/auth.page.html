@@ -8,27 +8,35 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form>
-    <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required></ion-input>
-    </ion-item>
+  <ion-grid>
+  
+    <form>
+      <ion-item lines="full">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="text" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required></ion-input>
+      </ion-item>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required></ion-input>
-    </ion-item>
-    
-    <ion-row>
-      <ion-col style="text-align: center;">
-        <ion-button type="submit" color="danger" expand="block" (click) ="login()">Acceder</ion-button>
-        <span class="divider line one-line">o</span>
+      <ion-item lines="full">
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required></ion-input>
+      </ion-item>
+      
+      <ion-row>
+        <ion-col style="text-align: center;">
+          <ion-button type="submit" color="danger" expand="block" (click) ="login()">Acceder</ion-button>
+          <span class="divider line one-line">o</span>
 
-        <span class="already">¿Aún no estás registrado?</span>
-        <ion-button [routerLink]="['/registro']" expand="block" color="primary">Registrarse</ion-button>
-        <a [routerLink]="['/reset-pass']" class="small-text">¿Olvidaste tu contraseña?</a>
-      </ion-col>
-    </ion-row>
-  </form>
+          <span class="already">¿Aún no estás registrado?</span>
+          <ion-button [routerLink]="['/registro']" expand="block" color="primary">Registrarse</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="text-align: center;">
+          <a [routerLink]="['/reset-pass']" class="small-text">¿Olvidaste tu contraseña?</a>
+        </ion-col>
+      </ion-row>
+    </form>
+
+  </ion-grid>
 
 </ion-content>
