@@ -62,6 +62,10 @@
       <ion-input type="text" [(ngModel)]="localidad" [ngModelOptions]="{standalone: true}" required></ion-input>
     </ion-item>
 
+    <ion-item lines="full">
+      <ion-label position="floating">Nombre del Box</ion-label>
+      <ion-input type="text" [(ngModel)]="box" [ngModelOptions]="{standalone: true}" required></ion-input>
+    </ion-item>
 
     <ion-list>
       <ion-radio-group>
@@ -79,11 +83,9 @@
       </ion-radio-group>
     </ion-list>
 
-
     <ion-item>
       <ion-textarea placeholder="En caso afirmativo, cuéntanos de qué se trata..."></ion-textarea>
     </ion-item>
-
 
     <ion-list>
       <ion-list-header>
@@ -94,7 +96,6 @@
         <ion-checkbox slot="end" [ngModelOptions]="{standalone: true}" [(ngModel)]="entry.isChecked"></ion-checkbox>
       </ion-item>
     </ion-list>
-
 
     <ion-item lines="full">
       <ion-label position="floating">¿Cómo nos conociste?</ion-label>

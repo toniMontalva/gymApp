@@ -112,7 +112,6 @@ export class AuthService {
     }
 
     registrarInfoUsuario(user: ICliente) {
-
         let ref = this.getClientesRefencia();
         ref.push(user);
     }
@@ -127,6 +126,16 @@ export class AuthService {
             })            
     }
 
+    signOutNew() {
+        this.clienteKey = "";
+        return this.afAuth
+            .auth
+            .signOut()
+            .then(() => {
+                // cerrada sesion
+            })
+    }
+
     forgotPass(email: string) {
         this.afAuth
             .auth
@@ -137,6 +146,13 @@ export class AuthService {
             .catch(function(error){
                 // error
             })
+    }
+
+    async returnKeyOfUserFirebase(email: string, password: string) : Promise<string> {
+        await this.login(email, password);
+        let key = this.afAuth.auth.currentUser.uid;
+        this.signOutNew();
+        return key;
     }
 
     getLoggedUserFirebase() {

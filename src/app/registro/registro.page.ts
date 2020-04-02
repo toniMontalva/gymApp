@@ -9,6 +9,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ICliente } from '../interfaces/interfaces';
 
 @Component({
   selector: 'app-registro',
@@ -22,6 +23,7 @@ export class RegistroPage implements OnInit {
     nombre: string = "";
     apellidos: string = "";
     fechaNacimiento: Date;
+    box: string = "";
     DNI: string = "";
     localidad: string = "";
     numTelf: number;
@@ -79,9 +81,29 @@ export class RegistroPage implements OnInit {
       toast.present();
     }
 
-    register() {
+    async register() {
       this.presentToastWithOptions();
-      this._authService.register(this.email, this.password);
+      
+      await this._authService.register(this.email, this.password);
+
+      let key = await this._authService.returnKeyOfUserFirebase(this.email, this.password);
+
+      let user : ICliente = {
+        // Define Si o No está activada la cuenta
+        "activada" : "No",
+        "apellidos" : this.apellidos,
+        "box" : this.box,
+        "dni" : this.DNI,
+        "email" : this.email,
+        "fechaNacimiento" : this.fechaNacimiento.toDateString(),    
+        "id" : key,
+        "localidad" : this.localidad,    
+        "nombre" : this.nombre,
+        "sesionesRestantes" : 10,
+        "telefono" : this.numTelf.toString(), 
+      }
+      
+      this._authService.registrarInfoUsuario(user);
     }
 
     abrirPoliticaPrivacidadSystem() {

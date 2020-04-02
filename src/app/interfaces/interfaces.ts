@@ -1,4 +1,6 @@
 export interface ICliente {
+    // Define Si o No está activada la cuenta
+    "activada" : string,
     "apellidos" : string,
     // Nombre del box (en minúsculas)
     "box" : string,
@@ -9,7 +11,7 @@ export interface ICliente {
     "localidad" : string,    
     "nombre" : string,
     "sesionesRestantes" : number,
-    "telefono" : string,    
+    "telefono" : string, 
     //"rol" : string,
 }
 
