@@ -87,7 +87,6 @@ export class AuthPage implements OnInit {
   goToHomePage() {
     this.saveLoggedUser();
     this.presentToastWelcomeUser();
-    console.log("Al iniciar sesion tengo " + this._authService.clienteKey);
     this.router.navigateByUrl('/menu');
   }
 
@@ -102,7 +101,19 @@ export class AuthPage implements OnInit {
     const { email, password} = this;
     try {
       const res = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-      this.goToHomePage();
+      this._authService.getLoggedUserFirebase();
+
+      let allowed = await this._authService.userIsAllowedToLogin(this._authService.clienteKey);
+
+      console.log("me ha llegado un " + allowed);
+
+      if(!allowed) {
+          this._authService.signOutNew();
+          console.log("no estoy activado y me deslogueo");
+      } else {
+          console.log("estoy activado y sigo logueado");
+          this.goToHomePage();
+      }      
     } catch(err) {
         console.dir(err)
         if(email == '') {

@@ -95,14 +95,14 @@ export class RegistroPage implements OnInit {
         "box" : this.box,
         "dni" : this.DNI,
         "email" : this.email,
-        "fechaNacimiento" : this.fechaNacimiento.toDateString(),    
+        "fechaNacimiento" : "this.fechaNacimiento.toISOString()",    
         "id" : key,
         "localidad" : this.localidad,    
         "nombre" : this.nombre,
         "sesionesRestantes" : 10,
         "telefono" : this.numTelf.toString(), 
       }
-      
+
       this._authService.registrarInfoUsuario(user);
     }
 

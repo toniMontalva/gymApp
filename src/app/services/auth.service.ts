@@ -89,14 +89,50 @@ export class AuthService {
         })
     }
 
-    login(email: string, password: string) {
+    async userIsAllowedToLogin(uid: string) : Promise<boolean> {
+        let allowed = false;
+
+        let ref = this.getClientesRefencia();
+
+        await ref.once("value", snapshot => {
+            snapshot.forEach(child => {
+                let value = child.val();
+                console.log("value " + value);
+                if(uid === value.id) {
+                    console.log("value id " + value.id);
+                    if(value.activada === "si"){
+                        console.log("value activada " + value.activada);
+                        allowed = true;
+                        return true;                 
+                    } else {
+                        console.log("value no activada " + value.activada);
+                        allowed = false;
+                        return true;
+                    }
+                }
+            })
+        })
+
+        return allowed;
+    }
+
+    login(email: string, password: string) {        
         this.afAuth
-            .auth
-            .signInWithEmailAndPassword(email, password)
-            .then(data => {
-                
-            });
+        .auth
+        .signInWithEmailAndPassword(email, password)
+        .then(data => {
+            
+        });
         this.getLoggedUserFirebase();
+        console.log("la key la tengo " + this.clienteKey);
+
+        let allowed = this.userIsAllowedToLogin(this.clienteKey);
+        if(!allowed) {
+            this.signOutNew();
+            console.log("no estoy activado y me deslogueo");
+        } else {
+            console.log("estoy activado y sigo logueado");
+        }
     }
 
     async register(email: string, password: string) {
@@ -112,7 +148,8 @@ export class AuthService {
     }
 
     registrarInfoUsuario(user: ICliente) {
-        let ref = this.getClientesRefencia();
+        //let ref = this.getClientesRefencia();
+        let ref = this._db.database.ref("Clientes/");
         ref.push(user);
     }
 
@@ -126,9 +163,9 @@ export class AuthService {
             })            
     }
 
-    signOutNew() {
+    async signOutNew() {
         this.clienteKey = "";
-        return this.afAuth
+        return await this.afAuth
             .auth
             .signOut()
             .then(() => {
@@ -150,7 +187,7 @@ export class AuthService {
 
     async returnKeyOfUserFirebase(email: string, password: string) : Promise<string> {
         await this.login(email, password);
-        let key = this.afAuth.auth.currentUser.uid;
+        let key = await this.afAuth.auth.currentUser.uid;
         this.signOutNew();
         return key;
     }
